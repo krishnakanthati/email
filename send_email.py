@@ -12,7 +12,7 @@ r = sr.Recognizer()
 mic = sr.Microphone()
 
 
-tts = gTTS('What has to be the subject of your Eamil')
+tts = gTTS('What has to be the subject of your Email')
 tts.save('subject.mp3')
 playsound('subject.mp3')
 with mic as source:
@@ -23,7 +23,7 @@ tts = gTTS('You said ' + subject_said)
 tts.save('subject_said.mp3')
 playsound('subject_said.mp3')
 
-tts = gTTS('What has to be the body of your Eamil')
+tts = gTTS('What has to be the body of your Email')
 tts.save('body.mp3')
 playsound('body.mp3')
 with mic as source:
@@ -31,7 +31,7 @@ with mic as source:
 body_said = r.recognize_google(audio)
 tts = gTTS('You said ' + body_said)
 tts.save('body_said.mp3')
-print(f'You said : {body_said}')
+print(f'You said: {body_said}')
 playsound('body_said.mp3')
 
 content = "Subject: {}\n\n{}".format(subject_said, body_said)
