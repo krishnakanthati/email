@@ -12,31 +12,33 @@ r = sr.Recognizer()
 mic = sr.Microphone()
 
 
-tts = gTTS('What is the subject of the email')
+tts = gTTS('What has to be the subject of your eamil')
 tts.save('subject.mp3')
 playsound('subject.mp3')
 with mic as source:
     audio = r.listen(source)
-subject = r.recognize_google(audio)
-print(f'THE subject is : {subject}')
+subject_said = r.recognize_google(audio)
+print(f'You said: {subject_said}')
+tts = gTTS(subject_said)
+tts.save('subject_said.mp3')
+playsound('subject_said.mp3')
 
-print("THe content")
+tts = gTTS('What has to be the body of your eamil')
+tts.save('body.mp3')
+playsound('body.mp3')
 with mic as source:
     audio = r.listen(source)
+body_said = r.recognize_google(audio)
+tts = gTTS(body_said)
+tts.save('body_said.mp3')
+print(f'You said : {body_said}')
+playsound('body_said.mp3')
 
-body_of_the_email = r.recognize_google(audio)
-tts = gTTS(body_of_the_email)
-tts.save('body_of_the_email.mp3')
-print(f'You said: {body_of_the_email}')
-playsound('body_of_the_email.mp3')
-
-content = "Subject: {}\n\n{}".format(subject, body_of_the_email)
+content = "Subject: {}\n\n{}".format(subject_said, body_said)
 
 server = smtplib.SMTP("smtp.gmail.com", 587)
 server.starttls()
 server.login(sender_email, password)
-
-#Login is authorised
 
 print("Login success")
 
